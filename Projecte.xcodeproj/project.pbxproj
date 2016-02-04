@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B2A47091C63C29B00F5613D /* ViewControllerSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2A47081C63C29B00F5613D /* ViewControllerSettings.swift */; };
+		2B2A470B1C63C2C200F5613D /* ViewControllerAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2A470A1C63C2C200F5613D /* ViewControllerAdd.swift */; };
 		2B7CD3751C62768600544047 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7CD3741C62768600544047 /* AppDelegate.swift */; };
 		2B7CD3771C62768800544047 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7CD3761C62768800544047 /* ViewController.swift */; };
 		2B7CD37A1C62768800544047 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B7CD3781C62768800544047 /* Main.storyboard */; };
@@ -14,7 +16,7 @@
 		2B7CD37F1C62768A00544047 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B7CD37E1C62768A00544047 /* Assets.xcassets */; };
 		2B7CD3821C62768A00544047 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B7CD3801C62768A00544047 /* LaunchScreen.storyboard */; };
 		2B7CD38B1C62772F00544047 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7CD3891C62772F00544047 /* Constants.swift */; };
-		2B7CD38C1C62772F00544047 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7CD38A1C62772F00544047 /* ProductTableViewCell.swift */; };
+		2B7CD38C1C62772F00544047 /* TableViewCellProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7CD38A1C62772F00544047 /* TableViewCellProduct.swift */; };
 		2B7CD3911C62788D00544047 /* Manual+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7CD38D1C62788D00544047 /* Manual+CoreDataProperties.swift */; };
 		2B7CD3921C62788D00544047 /* Manual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7CD38E1C62788D00544047 /* Manual.swift */; };
 		2B7CD3931C62788D00544047 /* Link+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7CD38F1C62788D00544047 /* Link+CoreDataProperties.swift */; };
@@ -22,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B2A47081C63C29B00F5613D /* ViewControllerSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerSettings.swift; sourceTree = "<group>"; };
+		2B2A470A1C63C2C200F5613D /* ViewControllerAdd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerAdd.swift; sourceTree = "<group>"; };
 		2B7CD3711C62768400544047 /* Projecte.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Projecte.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B7CD3741C62768600544047 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2B7CD3761C62768800544047 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -31,7 +35,7 @@
 		2B7CD3811C62768A00544047 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2B7CD3831C62768B00544047 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2B7CD3891C62772F00544047 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		2B7CD38A1C62772F00544047 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
+		2B7CD38A1C62772F00544047 /* TableViewCellProduct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCellProduct.swift; sourceTree = "<group>"; };
 		2B7CD38D1C62788D00544047 /* Manual+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Manual+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2B7CD38E1C62788D00544047 /* Manual.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Manual.swift; sourceTree = "<group>"; };
 		2B7CD38F1C62788D00544047 /* Link+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Link+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -71,7 +75,8 @@
 				2B7CD3901C62788D00544047 /* Link.swift */,
 				2B7CD38E1C62788D00544047 /* Manual.swift */,
 				2B7CD3761C62768800544047 /* ViewController.swift */,
-				2B7CD38A1C62772F00544047 /* ProductTableViewCell.swift */,
+				2B2A47081C63C29B00F5613D /* ViewControllerSettings.swift */,
+				2B7CD38A1C62772F00544047 /* TableViewCellProduct.swift */,
 				2B7CD3891C62772F00544047 /* Constants.swift */,
 				2B7CD3781C62768800544047 /* Main.storyboard */,
 				2B7CD37E1C62768A00544047 /* Assets.xcassets */,
@@ -81,6 +86,7 @@
 				2B7CD38F1C62788D00544047 /* Link+CoreDataProperties.swift */,
 				2B7CD38D1C62788D00544047 /* Manual+CoreDataProperties.swift */,
 				2B7CD3741C62768600544047 /* AppDelegate.swift */,
+				2B2A470A1C63C2C200F5613D /* ViewControllerAdd.swift */,
 			);
 			path = Projecte;
 			sourceTree = "<group>";
@@ -160,10 +166,12 @@
 				2B7CD3771C62768800544047 /* ViewController.swift in Sources */,
 				2B7CD3931C62788D00544047 /* Link+CoreDataProperties.swift in Sources */,
 				2B7CD3751C62768600544047 /* AppDelegate.swift in Sources */,
-				2B7CD38C1C62772F00544047 /* ProductTableViewCell.swift in Sources */,
+				2B2A470B1C63C2C200F5613D /* ViewControllerAdd.swift in Sources */,
+				2B7CD38C1C62772F00544047 /* TableViewCellProduct.swift in Sources */,
 				2B7CD3911C62788D00544047 /* Manual+CoreDataProperties.swift in Sources */,
 				2B7CD37D1C62768A00544047 /* Projecte.xcdatamodeld in Sources */,
 				2B7CD3941C62788D00544047 /* Link.swift in Sources */,
+				2B2A47091C63C29B00F5613D /* ViewControllerSettings.swift in Sources */,
 				2B7CD3921C62788D00544047 /* Manual.swift in Sources */,
 				2B7CD38B1C62772F00544047 /* Constants.swift in Sources */,
 			);
