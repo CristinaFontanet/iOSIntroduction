@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2B2A47091C63C29B00F5613D /* ViewControllerSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2A47081C63C29B00F5613D /* ViewControllerSettings.swift */; };
 		2B2A470B1C63C2C200F5613D /* ViewControllerAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2A470A1C63C2C200F5613D /* ViewControllerAdd.swift */; };
+		2B2A470D1C63C81F00F5613D /* TableViewCellLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2A470C1C63C81F00F5613D /* TableViewCellLink.swift */; };
 		2B7CD3751C62768600544047 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7CD3741C62768600544047 /* AppDelegate.swift */; };
 		2B7CD3771C62768800544047 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7CD3761C62768800544047 /* ViewController.swift */; };
 		2B7CD37A1C62768800544047 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B7CD3781C62768800544047 /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 /* Begin PBXFileReference section */
 		2B2A47081C63C29B00F5613D /* ViewControllerSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerSettings.swift; sourceTree = "<group>"; };
 		2B2A470A1C63C2C200F5613D /* ViewControllerAdd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerAdd.swift; sourceTree = "<group>"; };
+		2B2A470C1C63C81F00F5613D /* TableViewCellLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCellLink.swift; sourceTree = "<group>"; };
 		2B7CD3711C62768400544047 /* Projecte.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Projecte.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B7CD3741C62768600544047 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2B7CD3761C62768800544047 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 				2B7CD38D1C62788D00544047 /* Manual+CoreDataProperties.swift */,
 				2B7CD3741C62768600544047 /* AppDelegate.swift */,
 				2B2A470A1C63C2C200F5613D /* ViewControllerAdd.swift */,
+				2B2A470C1C63C81F00F5613D /* TableViewCellLink.swift */,
 			);
 			path = Projecte;
 			sourceTree = "<group>";
@@ -166,6 +169,7 @@
 				2B7CD3771C62768800544047 /* ViewController.swift in Sources */,
 				2B7CD3931C62788D00544047 /* Link+CoreDataProperties.swift in Sources */,
 				2B7CD3751C62768600544047 /* AppDelegate.swift in Sources */,
+				2B2A470D1C63C81F00F5613D /* TableViewCellLink.swift in Sources */,
 				2B2A470B1C63C2C200F5613D /* ViewControllerAdd.swift in Sources */,
 				2B7CD38C1C62772F00544047 /* TableViewCellProduct.swift in Sources */,
 				2B7CD3911C62788D00544047 /* Manual+CoreDataProperties.swift in Sources */,
