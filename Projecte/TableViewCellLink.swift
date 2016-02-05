@@ -8,8 +8,18 @@
 
 import UIKit
 
-class TableViewCellLink: UITableViewCell {
+protocol linksDelegate {
+    func deleteButtonSelected(which: NSIndexPath)
+}
 
+class TableViewCellLink: UITableViewCell {
+    
+    var delegate:linksDelegate!
+    var which: NSIndexPath!
+
+    @IBOutlet weak var linkText: UILabel!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -17,8 +27,10 @@ class TableViewCellLink: UITableViewCell {
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
 
+    @IBAction func onButtonClicked(sender: UIButton) {
+        delegate.deleteButtonSelected(which)
+    }
 }

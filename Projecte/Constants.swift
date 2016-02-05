@@ -10,3 +10,4 @@ import Foundation
 
 let entityManualName = "Manual"
 
+
