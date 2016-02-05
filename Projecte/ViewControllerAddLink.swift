@@ -49,7 +49,10 @@ class ViewControllerAddLink: UIViewController, UIPickerViewDelegate, UIPickerVie
     }
     
     @IBAction func saveClicked() {
-        delegate.saveNewDownloadLinkSelected(linkText.text, language: <#T##String#>)
+        print(linkText.selectedTextRange?.description)
+        if let text = linkText.text {
+    delegate.saveNewDownloadLinkSelected(text, language: " ")
+        }
     }
     
     /*
