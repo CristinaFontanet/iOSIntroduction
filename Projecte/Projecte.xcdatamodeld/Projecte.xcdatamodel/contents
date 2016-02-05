@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15C50" minimumToolsVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15D21" minimumToolsVersion="Automatic">
     <entity name="Link" representedClassName=".Link" syncable="YES">
         <attribute name="language" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="link" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="manual" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Manual" inverseName="link" inverseEntity="Manual" syncable="YES"/>
+        <relationship name="manual" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Manual" inverseName="links" inverseEntity="Manual" syncable="YES"/>
     </entity>
     <entity name="Manual" representedClassName=".Manual" syncable="YES">
         <attribute name="imagePath" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="link" optional="YES" toMany="YES" minCount="1" deletionRule="Nullify" destinationEntity="Link" inverseName="manual" inverseEntity="Link" syncable="YES"/>
+        <relationship name="links" optional="YES" toMany="YES" minCount="1" deletionRule="Nullify" destinationEntity="Link" inverseName="manual" inverseEntity="Link" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Manual" positionX="-63" positionY="-18" width="128" height="90"/>
         <element name="Link" positionX="-54" positionY="9" width="128" height="90"/>
+        <element name="Manual" positionX="-63" positionY="-18" width="128" height="90"/>
     </elements>
 </model>

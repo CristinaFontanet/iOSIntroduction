@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DIW-7s-Bil">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DIW-7s-Bil">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -283,7 +283,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O0B-VO-YXr">
                                 <rect key="frame" x="113" y="156" width="467" height="22"/>
                                 <connections>
-                                    <action selector="onAddLinkClicked" destination="Q2S-sn-jxu" eventType="touchUpInside" id="Wac-6z-raZ"/>
+                                    <action selector="onAddLinksClicked" destination="Q2S-sn-jxu" eventType="touchUpInside" id="m1s-jv-wA1"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -325,10 +325,105 @@
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <segue destination="CZs-sI-3Ak" kind="presentation" identifier="linkAdd" modalPresentationStyle="formSheet" id="V4W-P9-G5j"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zYp-jB-yi4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2060" y="1195"/>
+        </scene>
+        <!--View Controller Add Link-->
+        <scene sceneID="4oQ-cO-OZD">
+            <objects>
+                <viewController modalPresentationStyle="formSheet" id="CZs-sI-3Ak" customClass="ViewControllerAddLink" customModule="Projecte" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZFi-5F-fWB"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ru6-pb-NA4"/>
+                    </layoutGuides>
+                    <view key="view" autoresizesSubviews="NO" contentMode="center" id="2ff-cT-AK0">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add download link" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sZL-gO-2Fk">
+                                <rect key="frame" x="229" y="0.0" width="142" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="142" id="TB4-bA-9Vm"/>
+                                    <constraint firstAttribute="height" constant="50" id="gPc-ta-fVI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copy from browser and Paste here the download link" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tr4-Sb-xBP">
+                                <rect key="frame" x="20" y="58" width="403" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="tAA-Ey-WTj"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OQM-sx-mMK">
+                                <rect key="frame" x="20" y="110" width="433" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <pickerView contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="sPv-vY-Fis">
+                                <rect key="frame" x="461" y="110" width="119" height="299"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="119" id="8ow-kc-Zqy"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="CZs-sI-3Ak" id="9tb-Q8-lCz"/>
+                                    <outlet property="delegate" destination="CZs-sI-3Ak" id="gnj-zK-ANt"/>
+                                </connections>
+                            </pickerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RWN-AX-nB5">
+                                <rect key="frame" x="294" y="409" width="300" height="191"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="191" id="ZWR-U5-Jtj"/>
+                                </constraints>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="saveClicked" destination="CZs-sI-3Ak" eventType="touchUpInside" id="c40-mm-Yu5"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ouq-HD-WaR">
+                                <rect key="frame" x="-1" y="409" width="300" height="191"/>
+                                <state key="normal" title="Cancel"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="RWN-AX-nB5" firstAttribute="width" secondItem="ouq-HD-WaR" secondAttribute="width" id="02S-CF-Hbj"/>
+                            <constraint firstItem="RWN-AX-nB5" firstAttribute="top" secondItem="sPv-vY-Fis" secondAttribute="bottom" id="4DD-4l-Xh3"/>
+                            <constraint firstItem="ouq-HD-WaR" firstAttribute="leading" secondItem="2ff-cT-AK0" secondAttribute="leadingMargin" constant="-21" id="6rk-nO-xOl"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="sPv-vY-Fis" secondAttribute="trailing" id="8lP-We-nDh"/>
+                            <constraint firstItem="Ru6-pb-NA4" firstAttribute="top" secondItem="RWN-AX-nB5" secondAttribute="bottom" id="BIB-AO-3cx"/>
+                            <constraint firstItem="sPv-vY-Fis" firstAttribute="top" secondItem="Tr4-Sb-xBP" secondAttribute="bottom" constant="8" id="BMN-dm-XLw"/>
+                            <constraint firstItem="ouq-HD-WaR" firstAttribute="width" secondItem="2ff-cT-AK0" secondAttribute="width" multiplier="1:2" id="QBS-9O-CHV"/>
+                            <constraint firstItem="Tr4-Sb-xBP" firstAttribute="leading" secondItem="2ff-cT-AK0" secondAttribute="leadingMargin" id="Sjm-4B-dOQ"/>
+                            <constraint firstItem="Tr4-Sb-xBP" firstAttribute="top" secondItem="sZL-gO-2Fk" secondAttribute="bottom" constant="8" id="TMD-rq-Yec"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="RWN-AX-nB5" secondAttribute="trailing" constant="-14" id="TOg-nu-Cif"/>
+                            <constraint firstItem="ouq-HD-WaR" firstAttribute="height" secondItem="RWN-AX-nB5" secondAttribute="height" id="Xgt-vZ-nSd"/>
+                            <constraint firstItem="sZL-gO-2Fk" firstAttribute="top" secondItem="ZFi-5F-fWB" secondAttribute="bottom" id="cLr-g1-UkG"/>
+                            <constraint firstItem="OQM-sx-mMK" firstAttribute="leading" secondItem="2ff-cT-AK0" secondAttribute="leadingMargin" id="fJQ-1J-g2g"/>
+                            <constraint firstItem="ouq-HD-WaR" firstAttribute="top" secondItem="sPv-vY-Fis" secondAttribute="bottom" id="fVl-sm-nhb"/>
+                            <constraint firstItem="sPv-vY-Fis" firstAttribute="leading" secondItem="OQM-sx-mMK" secondAttribute="trailing" constant="8" id="hwB-Ao-cDw"/>
+                            <constraint firstItem="OQM-sx-mMK" firstAttribute="top" secondItem="Tr4-Sb-xBP" secondAttribute="bottom" constant="8" id="lO7-ig-1jV"/>
+                            <constraint firstItem="Ru6-pb-NA4" firstAttribute="top" secondItem="ouq-HD-WaR" secondAttribute="bottom" id="oFv-kc-Hbt"/>
+                            <constraint firstItem="sZL-gO-2Fk" firstAttribute="centerX" secondItem="2ff-cT-AK0" secondAttribute="centerX" id="wQc-ie-frX"/>
+                        </constraints>
+                    </view>
+                    <splitViewDetailSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="languagesPicker" destination="sPv-vY-Fis" id="UFO-1P-6ne"/>
+                        <outlet property="linkText" destination="OQM-sx-mMK" id="45i-ed-ZWN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5eh-Dv-UKm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2881" y="1195"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="lej-Go-9jP">

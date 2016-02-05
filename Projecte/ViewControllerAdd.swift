@@ -8,16 +8,14 @@
 
 import UIKit
 
-class ViewControllerAdd: UIViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, linksDelegate {
+class ViewControllerAdd: UIViewController, UITableViewDataSource, UITableViewDelegate, linksDelegate, linkAddDelegate {
 
-    
-    var links = [String]()
-    var languages = ["Mozzarella","Gorgonzola","Provolone","Brie","Maytag Blue","Sharp Cheddar","Monterrey Jack","Stilton","Gouda","Goat Cheese", "Asiago"]
-    var picker:UIPickerView!
+    var manual: Manual!
+    var links = [Link]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        manual = Manual()
         // Do any additional setup after loading the view.
     }
 
@@ -25,7 +23,6 @@ class ViewControllerAdd: UIViewController, UITableViewDataSource, UITableViewDel
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -40,78 +37,43 @@ class ViewControllerAdd: UIViewController, UITableViewDataSource, UITableViewDel
         //let cell = tableView.dequeueReusableCellWithIdentifier("userAttribute", forIndexPath: indexPath)
         if let cell = tableView.dequeueReusableCellWithIdentifier("linkCell", forIndexPath: indexPath) as? TableViewCellLink {
             cell.delegate = self
-            cell.linkText.text = links[indexPath.row]
+            cell.linkText.text = links[indexPath.row].language
             cell.which = indexPath
             return cell
         }
         return UITableViewCell()
     }
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 1
-    }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return languages.count
+    @IBAction func onAddLinksClicked() {
+        performSegueWithIdentifier("linkAdd", sender: self)
+        
     }
 
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return languages[row]
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        guard let segueIdentifier = segue.identifier else {
+            return
+        }
+        
+        print(segueIdentifier)
+        
+        switch segueIdentifier {
+        case "linkAdd":
+            let destination = segue.destinationViewController as! ViewControllerAddLink
+            destination.delegate = self
+            
+        default: break
+        }
+        
     }
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-      //  myLabel.text = pickerData[row]
-        print("He seleccionat "+languages[row])
-    }
-    
-    @IBAction func onAddLinkClicked() {
-       // let alert =
-        let actionSheetController: UIAlertController = UIAlertController(title: "Add link", message: "Copy from the browser and Paste here the download link", preferredStyle: .Alert)
+    func saveNewDownloadLinkSelected(link:String, language:String) {
+        let newLink = Link()
+        newLink.manual = manual
+        newLink.language = language
+        newLink.link = link
         
-        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in //no fem res quan cliquem cancel
-        }
-        let nextAction: UIAlertAction = UIAlertAction(title: "Save", style: .Default) { action -> Void in
-            print("falta guardar el link")
-        }
-        
-        actionSheetController.addAction(cancelAction)
-        actionSheetController.addAction(nextAction)
-        actionSheetController.addTextFieldWithConfigurationHandler { textField -> Void in
-            textField.textColor = UIColor.blueColor()
-        }
-        
-        let pickerFrame: CGRect = CGRectMake(0,0, 0, 0); // CGRectMake(left), top, width, height) - left and top are like margins
-        picker = UIPickerView(frame: pickerFrame);
-        
-        //  set the pickers datasource and delegate
-        picker.delegate = self;
-        picker.dataSource = self;
-      //  picker.center = CGPointMake(self.view.bounds.size.width/2.0, self.view.bounds.size.height / 2.0)
-  //      let auxContr = UIViewController()
-   
-        //  Add the picker to the alert controller
-        actionSheetController .view.subviews[0].subviews[0].subviews[0].addSubview(picker);
-      //  actionSheetController.addChildViewController(picker)
-      //  actionSheetController.view.bounds = CGRectMake(200.0,200.0,200.0,200)
-        
-      //  actionSheetController.view.sizeThatFits(CGSize(width: 200, height: 200))
-      //  actionSheetController.automaticallyAdjustsScrollViewInsets = true
-      //  actionSheetController.addChildViewController(ViewControllerPicker())
-        
-        
-        print("num: " + String(actionSheetController.view.subviews.count))
-        print("View1: " + actionSheetController.view.subviews[0].description)
-        print("     num1: " + String(actionSheetController.view.subviews[0].subviews.count))
-        print("     View10: " + actionSheetController.view.subviews[0].subviews[0].description)
-        print("         num2: " + String(actionSheetController.view.subviews[0].subviews[0].subviews.count))
-        print("     View10: " + actionSheetController.view.subviews[0].subviews[0].subviews[0].description)
-        print("         num2: " + String(actionSheetController.view.subviews[0].subviews[0].subviews[0].subviews.count))
-   //     print("View2: " + actionSheetController.view.subviews[1].description)
-//        let topConstraint = NSLayoutConstraint(item: picker, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: actionSheetController.view.subviews[0], attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: 0)
-//        actionSheetController.view.addConstraint(topConstraint)
-        let botConstraint = NSLayoutConstraint(item: picker, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: actionSheetController.view.subviews[1], attribute: NSLayoutAttribute.Top, multiplier: 1, constant: 0)
-        actionSheetController.view.addConstraint(botConstraint)
-        self.presentViewController(actionSheetController, animated: true, completion: nil)
     }
     
     func deleteButtonSelected(which: NSIndexPath) {
