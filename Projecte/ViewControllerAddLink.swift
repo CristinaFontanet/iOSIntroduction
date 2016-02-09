@@ -22,6 +22,7 @@ class ViewControllerAddLink: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        linkText.becomeFirstResponder()
         // Do any additional setup after loading the view.
     }
 
@@ -42,19 +43,17 @@ class ViewControllerAddLink: UIViewController, UIPickerViewDelegate, UIPickerVie
         return languages[row]
     }
     
-    
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        //  myLabel.text = pickerData[row]
-        print("He seleccionat "+languages[row])
-    }
-    
     @IBAction func saveClicked() {
-        print(linkText.selectedTextRange?.description)
-        if let text = linkText.text {
-    delegate.saveNewDownloadLinkSelected(text, language: " ")
+     //   print(linkText.selectedTextRange?.description)
+        print(languages[languagesPicker.selectedRowInComponent(0)])
+        if linkText.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet() ) != "" {
+                delegate.saveNewDownloadLinkSelected(linkText.text!, language: languages[languagesPicker.selectedRowInComponent(0)])
         }
     }
     
+    @IBAction func cancelClicked() {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
     /*
     // MARK: - Navigation
 

@@ -17,6 +17,7 @@ class ProductTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var languagesLabel: UILabel!
     @IBOutlet weak var imageManual: UIImageView!
+    
     var delegate: SwitchClickDelegate!
     var path: NSIndexPath!
     

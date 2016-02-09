@@ -18,6 +18,7 @@ class TableViewCellLink: UITableViewCell {
     var which: NSIndexPath!
 
     @IBOutlet weak var linkText: UILabel!
+    @IBOutlet weak var languageText: UILabel!
     
     
     override func awakeFromNib() {
