@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DIW-7s-Bil">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DIW-7s-Bil">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -121,7 +121,7 @@
         <!--Send View Controller-->
         <scene sceneID="J3C-iJ-YNd">
             <objects>
-                <viewController id="wuR-7S-eQn" userLabel="Send View Controller" sceneMemberID="viewController">
+                <viewController id="wuR-7S-eQn" userLabel="Send View Controller" customClass="ViewControllerSend" customModule="Projecte" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="l6N-VM-3W0"/>
                         <viewControllerLayoutGuide type="bottom" id="Jf0-Uh-Qqe"/>
@@ -130,8 +130,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZH8-YI-8m8">
-                                <rect key="frame" x="20" y="28" width="560" height="120"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZH8-YI-8m8">
+                                <rect key="frame" x="20" y="72" width="560" height="120"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nom:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hlM-l4-WU7">
                                         <rect key="frame" x="0.0" y="49" width="112" height="21"/>
@@ -158,8 +158,8 @@
                                     <constraint firstItem="hlM-l4-WU7" firstAttribute="leading" secondItem="ZH8-YI-8m8" secondAttribute="leading" id="wQP-mC-rnV"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="adF-nL-QLO">
-                                <rect key="frame" x="20" y="148" width="560" height="120"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="adF-nL-QLO">
+                                <rect key="frame" x="20" y="192" width="560" height="120"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Correu:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zj4-zh-1ut">
                                         <rect key="frame" x="0.0" y="49" width="112" height="21"/>
@@ -186,9 +186,12 @@
                                     <constraint firstItem="Zj4-zh-1ut" firstAttribute="centerY" secondItem="adF-nL-QLO" secondAttribute="centerY" id="nt2-G2-SKv"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F39-ex-Bok">
-                                <rect key="frame" x="20" y="268" width="560" height="332"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F39-ex-Bok">
+                                <rect key="frame" x="20" y="312" width="560" height="239"/>
                                 <state key="normal" title="Send"/>
+                                <connections>
+                                    <action selector="onSendClicked" destination="wuR-7S-eQn" eventType="touchUpInside" id="Rp3-dD-jlG"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -207,6 +210,10 @@
                             <constraint firstAttribute="trailingMargin" secondItem="ZH8-YI-8m8" secondAttribute="trailing" id="zFW-Wk-oi6"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="mailField" destination="8T2-ST-luo" id="3iu-rs-Wm7"/>
+                        <outlet property="nameField" destination="Wg6-dD-HjM" id="pSs-0C-NYR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tVX-xW-AKv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

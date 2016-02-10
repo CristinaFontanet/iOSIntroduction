@@ -24,6 +24,7 @@
 		2B7CD3921C62788D00544047 /* Manual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7CD38E1C62788D00544047 /* Manual.swift */; };
 		2B7CD3931C62788D00544047 /* Link+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7CD38F1C62788D00544047 /* Link+CoreDataProperties.swift */; };
 		2B7CD3941C62788D00544047 /* Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7CD3901C62788D00544047 /* Link.swift */; };
+		6BD5DFF91C6B1CF7002E01D8 /* ViewControllerSend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD5DFF81C6B1CF7002E01D8 /* ViewControllerSend.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		2B7CD38E1C62788D00544047 /* Manual.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Manual.swift; sourceTree = "<group>"; };
 		2B7CD38F1C62788D00544047 /* Link+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Link+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2B7CD3901C62788D00544047 /* Link.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Link.swift; sourceTree = "<group>"; };
+		6BD5DFF81C6B1CF7002E01D8 /* ViewControllerSend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerSend.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,8 @@
 				2B2A47081C63C29B00F5613D /* ViewControllerSettings.swift */,
 				2B2A470A1C63C2C200F5613D /* ViewControllerAdd.swift */,
 				2B797FF81C64FC14001028BD /* ViewControllerAddLink.swift */,
+				2B4D1DF41C64C8B2006CB3E0 /* ViewControllerPicker.swift */,
+				6BD5DFF81C6B1CF7002E01D8 /* ViewControllerSend.swift */,
 				2B7CD38A1C62772F00544047 /* TableViewCellProduct.swift */,
 				2B2A470C1C63C81F00F5613D /* TableViewCellLink.swift */,
 				2B7CD3891C62772F00544047 /* Constants.swift */,
@@ -95,7 +99,6 @@
 				2B7CD38F1C62788D00544047 /* Link+CoreDataProperties.swift */,
 				2B7CD38D1C62788D00544047 /* Manual+CoreDataProperties.swift */,
 				2B7CD3741C62768600544047 /* AppDelegate.swift */,
-				2B4D1DF41C64C8B2006CB3E0 /* ViewControllerPicker.swift */,
 			);
 			path = Projecte;
 			sourceTree = "<group>";
@@ -183,6 +186,7 @@
 				2B797FF91C64FC14001028BD /* ViewControllerAddLink.swift in Sources */,
 				2B4D1DF51C64C8B2006CB3E0 /* ViewControllerPicker.swift in Sources */,
 				2B7CD3941C62788D00544047 /* Link.swift in Sources */,
+				6BD5DFF91C6B1CF7002E01D8 /* ViewControllerSend.swift in Sources */,
 				2B2A47091C63C29B00F5613D /* ViewControllerSettings.swift in Sources */,
 				2B7CD3921C62788D00544047 /* Manual.swift in Sources */,
 				2B7CD38B1C62772F00544047 /* Constants.swift in Sources */,
