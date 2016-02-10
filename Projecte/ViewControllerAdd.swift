@@ -33,31 +33,32 @@ class ViewControllerAdd: UIViewController, UITableViewDataSource, UITableViewDel
     var links = [Link]()
     
     lazy var applicationDocumentsDirectory: NSURL = {
-        // The directory the application uses to store the Core Data store file. This code uses a directory named "FIB.Projecte" in the application's documents Application Support directory.
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
         return urls[urls.count-1]
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.manualName.delegate = self //Per poder amagar el teclat
-        imageView.image = UIImage(named: "Book")
-        newPicture = false
-        
+    func initCore() {
         appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         managedObjectsContext = appDelegate.managedObjectContext
         entityManualDescription = NSEntityDescription.entityForName("Manual", inManagedObjectContext: managedObjectsContext) //descripció d'entitat, no instacia!!
         entityLinkDescription = NSEntityDescription.entityForName("Link", inManagedObjectContext: managedObjectsContext) //descripció d'entitat, no instacia!!
         manual = Manual(entity: entityManualDescription!, insertIntoManagedObjectContext: managedObjectsContext )
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.manualName.delegate = self //Per poder amagar el teclat
+        imageView.image = UIImage(named: Images.placeholder)
+        newPicture = false
         
+        initCore()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
-    
+ /* ReturnKey */
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
@@ -90,8 +91,6 @@ class ViewControllerAdd: UIViewController, UITableViewDataSource, UITableViewDel
             return
         }
         
-        print(segueIdentifier)
-        
         switch segueIdentifier {
         case "linkAdd":
             let destination = segue.destinationViewController as! ViewControllerAddLink
@@ -113,10 +112,8 @@ class ViewControllerAdd: UIViewController, UITableViewDataSource, UITableViewDel
     
     func saveNewDownloadLinkSelected(link:String, language:String) {
         if let _ = manual.hasLanguage(language) {
-            let mess = "This manual already has a " + language + " link"
-            let ac = UIAlertController(title: "Save error", message: mess, preferredStyle: .Alert)
-            ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-            presentViewController(ac, animated: true, completion: nil)
+            let mess =  NSLocalizedString("repeatedLanguagePrevious", comment: " ") + language + NSLocalizedString("repeatedLanguageAfter", comment: " ")
+            AlertManager.basicAlert(NSLocalizedString("alertTitleSaveError", comment: " "), message: mess, button: NSLocalizedString("Ok", comment: " "), who: self)
         }
         else {
             lastAddLinkView.dismissViewControllerAnimated(true) {
@@ -129,22 +126,21 @@ class ViewControllerAdd: UIViewController, UITableViewDataSource, UITableViewDel
                 self.linksTable.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Bottom)
             }
         }
-        
     }
     
 /* Delete links */
     func deleteButtonSelected(which: NSIndexPath) {
         print("Delete from " + String(which.row) + " selected")
-        let actionSheetController: UIAlertController = UIAlertController(title: "Delete link", message: "Are you sure you want to delete this link?", preferredStyle: .Alert)
+        let actionSheetController: UIAlertController = UIAlertController(title: NSLocalizedString("alertTitleDeleteLink", comment: " "), message: NSLocalizedString("alertMessageDeleteLink", comment: " "), preferredStyle: .Alert)
         
-        let cancelAction: UIAlertAction = UIAlertAction(title: "No", style: .Cancel) { action -> Void in
+        let cancelAction: UIAlertAction = UIAlertAction(title: NSLocalizedString("No", comment: " "), style: .Cancel) { action -> Void in
             //Just dismiss the action sheet
         }
         actionSheetController.addAction(cancelAction)
         
         
         /////HEREEEEEEEEEEEEEEEEEE
-        let yesAction: UIAlertAction = UIAlertAction(title: "Yes", style: .Default) { action -> Void in
+        let yesAction: UIAlertAction = UIAlertAction(title: NSLocalizedString("Yes", comment: " "), style: .Default) { action -> Void in
             let aux = self.manual.links as! NSMutableSet
             aux.removeObject(self.links[which.row])
             self.manual.links = aux as NSSet
@@ -153,23 +149,22 @@ class ViewControllerAdd: UIViewController, UITableViewDataSource, UITableViewDel
         }
         actionSheetController.addAction(yesAction)
         
-        //Present the AlertController
         self.presentViewController(actionSheetController, animated: true, completion: nil)
     }
 
 /*Add image */
     @IBAction func onImageAddClicked(sender: UIButton) {
-        let alert = UIAlertController(title: "Choose an image", message: "", preferredStyle: .Alert) // 1
-        let firstAction = UIAlertAction(title: "From camera", style: .Default) { (alert: UIAlertAction!) -> Void in
+        let alert = UIAlertController(title: NSLocalizedString("alertTitleImage", comment: " "), message: "", preferredStyle: .Alert)
+        let firstAction = UIAlertAction(title: NSLocalizedString("alertActionCamera", comment: " "), style: .Default) { (alert: UIAlertAction!) -> Void in
             self.cameraOptionSelected()
         }
         alert.addAction(firstAction)
         
-        let secondAction = UIAlertAction(title: "From file", style: .Default) { (alert: UIAlertAction!) -> Void in
+        let secondAction = UIAlertAction(title: NSLocalizedString("alertActionFile", comment: " "), style: .Default) { (alert: UIAlertAction!) -> Void in
             self.cameraRollOptionSelected()
         }
         alert.addAction(secondAction)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (alert: UIAlertAction!) -> Void in
+        let cancelAction = UIAlertAction(title: NSLocalizedString("alertActionCancel", comment: " "), style: .Default) { (alert: UIAlertAction!) -> Void in
             //discard
         }
         alert.addAction(cancelAction)
@@ -225,9 +220,7 @@ class ViewControllerAdd: UIViewController, UITableViewDataSource, UITableViewDel
     
     func image(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafePointer<Void>) {
         if error != nil {
-            let ac = UIAlertController(title: "Save error", message: error?.localizedDescription, preferredStyle: .Alert)
-            ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-            presentViewController(ac, animated: true, completion: nil)
+            AlertManager.basicAlert(NSLocalizedString("alertTitleSaveError", comment: " "), message: (error?.localizedDescription)!, button: NSLocalizedString("Ok", comment: " "), who: self)
         }
         else {
         }
@@ -237,7 +230,6 @@ class ViewControllerAdd: UIViewController, UITableViewDataSource, UITableViewDel
         let dataImag = UIImagePNGRepresentation(image)
         let fileURL = applicationDocumentsDirectory.URLByAppendingPathComponent(name)
         if let data = dataImag {
-            print("guardem al path: " + fileURL.path!)
             data.writeToFile(fileURL.path!, atomically: true)
             manual.imagePath = fileURL.path
         }
@@ -257,15 +249,11 @@ class ViewControllerAdd: UIViewController, UITableViewDataSource, UITableViewDel
                 performSegueWithIdentifier("newManual", sender: self)
             }
             else {
-                let ac = UIAlertController(title: "Save error", message: "Add links please", preferredStyle: .Alert)
-                ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-                presentViewController(ac, animated: true, completion: nil)
+                AlertManager.basicAlert(NSLocalizedString("alertTitleSaveError", comment: " "), message: NSLocalizedString("alertMessageAddLinks", comment: " "), button: NSLocalizedString("Ok", comment: " "), who: self)
             }
         }
         else {
-            let ac = UIAlertController(title: "Save error", message: "Write a name please", preferredStyle: .Alert)
-            ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-            presentViewController(ac, animated: true, completion: nil)
+            AlertManager.basicAlert(NSLocalizedString("alertTitleSaveError", comment: " "), message: NSLocalizedString("alertMessageWriteName", comment: " "), button: NSLocalizedString("Ok", comment: " "), who: self)
         }
         
     }

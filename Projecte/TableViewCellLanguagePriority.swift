@@ -27,17 +27,13 @@ class TableViewCellLanguagePriority: UITableViewCell {
         priorityStepper.autorepeat = true
         priorityStepper.maximumValue = 10
         priorityStepper.minimumValue = 0
-        print("awakeFromNib")
-        // Initialization code
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
-    
+ /* alert the change to the delegate */
     @IBAction func valueChanged(sender: UIStepper) {
         priorityLabel.text = Int(sender.value).description
         delegate.priorityChanged(languageNum, newPriority: Int(sender.value))

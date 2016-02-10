@@ -23,14 +23,13 @@ class TableViewCellLink: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
     }
 
+/*Alert that the delete button of the cell has been pressed */
     @IBAction func onButtonClicked(sender: UIButton) {
         delegate.deleteButtonSelected(which)
     }

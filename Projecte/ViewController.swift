@@ -16,12 +16,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var manuals:[Manual]!
     var selectedManuals:Set<NSIndexPath>!
+    var manualsToSend: [Manual]!
     
     
     func initialize() {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedObjectsContext = appDelegate.managedObjectContext
-        //   entityDescription = NSEntityDescription.entityForName(entityManualName, inManagedObjectContext: managedObjectsContext) //descripció d'entitat, no instacia!!
         let fetchProductRequest = NSFetchRequest(entityName: "Manual")
         do {
             manuals = try managedObjectsContext.executeFetchRequest(fetchProductRequest) as! [Manual]
@@ -34,8 +34,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func initializeLanguagesForFirstTime() {
         let userDefaults = NSUserDefaults.standardUserDefaults()
-        if let _ = userDefaults.objectForKey("languages") {/* It's not the first time */ }
-        else {
+        if let _ = userDefaults.objectForKey("languages") {/* It's not the first time so it already has a value */ }
+        else { /* set a default value */
             userDefaults.setObject(["EN","ES","CAT"], forKey: "languages")
         }
     }
@@ -44,7 +44,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
         initialize()
         initializeLanguagesForFirstTime()
-               // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,13 +60,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     lazy var applicationDocumentsDirectory: NSURL = {
-        // The directory the application uses to store the Core Data store file. This code uses a directory named "FIB.Projecte" in the application's documents Application Support directory.
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
         return urls[urls.count-1]
     }()
+
+    func setPlaceholderImage(cell: ProductTableViewCell) {
+        cell.imageManual.image = UIImage(named: Images.placeholder)
+    }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
-        //let cell = tableView.dequeueReusableCellWithIdentifier("userAttribute", forIndexPath: indexPath)
+        
         if let cell = tableView.dequeueReusableCellWithIdentifier("manualCell", forIndexPath: indexPath) as? ProductTableViewCell {
             cell.delegate = self
             cell.path = indexPath
@@ -87,7 +89,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             //image
             let fileManager = NSFileManager.defaultManager()
             guard manuals[indexPath.row].name != nil else {
-                cell.imageManual.image = UIImage(named: "Book")
+                setPlaceholderImage(cell)
                 return cell
             }
             let pathURL = applicationDocumentsDirectory.URLByAppendingPathComponent(manuals[indexPath.row].name!)
@@ -95,28 +97,28 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 if fileManager.fileExistsAtPath(path), let recoveredData = fileManager.contentsAtPath(path) {
                         cell.imageManual.image = UIImage(data: recoveredData)
                 }
-                else { cell.imageManual.image = UIImage(named: "Book") }
+                else { setPlaceholderImage(cell) }
             }
-            else { cell.imageManual.image = UIImage(named: "Book") }
+            else { setPlaceholderImage(cell) }
             
             return cell
         }
-    
         return UITableViewCell()
     }
-    
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 80
     }
     
+ /* To controll which cells have the switch on */
     func onSwitchChange(active:Bool, indexPath: NSIndexPath) {
         if(active) { selectedManuals.insert(indexPath) }
         else { selectedManuals.remove(indexPath) }
     }
     
+ /* As a delegate, when returning from the creation of a new Manual*/
     func newManualAdded(newManual:Manual, addView: ViewControllerAdd) {
-        initialize()    //Navigation
+        initialize()    //Navigation?
         manuals.append(newManual)
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.saveContext()
@@ -126,27 +128,31 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
+    
+ /* To send the manuals with the switch on */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
         guard let segueIdentifier = segue.identifier else {
             return
         }
-        
         switch segueIdentifier {
         case "send":
             let destination = segue.destinationViewController as! ViewControllerSend
-            var manualsToSend = [Manual]()
-            for path in selectedManuals {
-                manualsToSend.append(manuals[path.row])
-            }
             destination.manuals = manualsToSend
         default: break
         }
     }
     
     @IBAction func onSendClick() {
-        performSegueWithIdentifier("send", sender: self)
+        manualsToSend = [Manual]()
+        for path in selectedManuals {
+            manualsToSend.append(manuals[path.row])
+        }
+        if manualsToSend.count > 0 {
+           performSegueWithIdentifier("send", sender: self)
+        }
+        else {
+            AlertManager.basicAlert(NSLocalizedString("alertTitleSendError", comment: " "), message: NSLocalizedString("alertMessageNoManualsSelected", comment: " "), button: NSLocalizedString("Ok", comment: " "), who: self)
+        }
     }
 
 }
-

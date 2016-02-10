@@ -15,9 +15,9 @@ protocol linkAddDelegate {
 class ViewControllerAddLink: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
     @IBOutlet weak var languagesPicker: UIPickerView!
-    var delegate: linkAddDelegate!
-    
     @IBOutlet weak var linkText: UITextField!
+    
+    var delegate: linkAddDelegate!
     var languages = [String]()
     
     override func viewDidLoad() {
@@ -29,16 +29,15 @@ class ViewControllerAddLink: UIViewController, UIPickerViewDelegate, UIPickerVie
             if let hope = lang as? [String] {
                 languages = hope
             }
-            else { linkText.text = "puc obrir pro es nil" }
         }
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
+/*Picker functions */
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -51,9 +50,9 @@ class ViewControllerAddLink: UIViewController, UIPickerViewDelegate, UIPickerVie
         return languages[row]
     }
     
+/* Save new link */
     @IBAction func saveClicked() {
-     //   print(linkText.selectedTextRange?.description)
-        print(languages[languagesPicker.selectedRowInComponent(0)])
+        /* Check that there's something writted and send the new information link to the delegate*/
         if linkText.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet() ) != "" {
                 delegate.saveNewDownloadLinkSelected(linkText.text!, language: languages[languagesPicker.selectedRowInComponent(0)])
         }

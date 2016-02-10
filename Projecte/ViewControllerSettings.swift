@@ -14,18 +14,18 @@ class ViewControllerSettings: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
+ /* Add a new manual*/
     @IBAction func onButtonClicked(sender: UIButton) {
         performSegueWithIdentifier("addManual", sender: self)
     }
-
+    
+/* Add a new language*/
     func alreadyExistsLanguage(languages: [String], newLanguage:String)->Bool {
         for lang in languages {
             if lang == newLanguage {return true}
@@ -34,9 +34,9 @@ class ViewControllerSettings: UIViewController {
     }
     
     @IBAction func onAddLanguageClicked() {
-        let alert = UIAlertController(title: "New Language", message: "Add a new language", preferredStyle: .Alert)
+        let alert = UIAlertController(title: NSLocalizedString("New Language", comment: " "), message: NSLocalizedString("Add a new language", comment: " "), preferredStyle: .Alert)
         
-        let saveAction = UIAlertAction(title: "Save", style: .Default, handler: { (action:UIAlertAction) -> Void in
+        let saveAction = UIAlertAction(title: NSLocalizedString("Save", comment: " "), style: .Default, handler: { (action:UIAlertAction) -> Void in
             let textField = alert.textFields!.first
             let newLanguage = textField!.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
             if newLanguage != "" {
@@ -50,17 +50,16 @@ class ViewControllerSettings: UIViewController {
                 if !self.alreadyExistsLanguage(languages, newLanguage: newLanguage) {
                     languages.append(newLanguage)
                     userDefaults.setObject(languages, forKey: "languages")
-                    
-                    AlertManager.basicAlert(NSLocalizedString("alertTitleNewLanguageOk", comment: " "), message: "The new language has been saved.", button: "Ok", who: self)
+                    AlertManager.basicAlert(NSLocalizedString("alertTitleNewLanguageOk", comment: " "), message: NSLocalizedString("alertMessageNewLanguageOk", comment: " "), button: NSLocalizedString("Ok", comment: " "), who: self)
                 }
                 else {
-                    AlertManager.basicAlert(NSLocalizedString("alertTitleNewLanguageError", comment: " "), message: "This language already exists", button: "Ok", who: self)
+                    AlertManager.basicAlert(NSLocalizedString("alertTitleSaveError", comment: " "), message: NSLocalizedString("alertMessageNewLanguageError", comment: " "), button: NSLocalizedString("Ok", comment: " "), who: self)
                 }
             }
         })
         
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action: UIAlertAction) -> Void in }
+        let cancelAction = UIAlertAction(title: NSLocalizedString("alertActionCancel", comment: " "), style: .Cancel) { (action: UIAlertAction) -> Void in }
         
         alert.addTextFieldWithConfigurationHandler {        //x afegir el textField
             (textField: UITextField) -> Void in

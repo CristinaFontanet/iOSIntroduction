@@ -42,20 +42,19 @@ class ViewControllerSend: UIViewController, MFMailComposeViewControllerDelegate,
         nameField.delegate = self
         mailField.delegate = self
         initializePriority()
-
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-    
+
+/*Return Key */
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
     }
-    
+
+/*Table functions */
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
@@ -71,39 +70,34 @@ class ViewControllerSend: UIViewController, MFMailComposeViewControllerDelegate,
             cell.priorityLabel.text = String(priority[indexPath.row].priority)
             cell.languageNum = indexPath.row
             cell.delegate = self
-            
             return cell
         }
         return UITableViewCell()
     }
     
-    
+/* Do all stuff to send a message with the links in the prefered language*/
     @IBAction func onSendClicked() {
-        print("Vaig a preparar els links de " + String(manuals.count) + " manuals")
         selectLinksToSend()
-        print("Vaig a cridar a enviar")
+        
         sendEmail()
     }
-    
+    /* For each Manual, we want to send the link in the language determinate for the language priority selected if it exists; if the manual doesn't have any of the languages selected, the link will be in some other language aviable*/
     func selectLinksToSend() {
+        /*languages ordered in descendent priority */
         self.priority.sortInPlace { $0.priority > $1.priority }
         
         for manual in manuals {
-            print("aquest manual te " + String(manual.links?.count) + " links")
             var i = 0
             var trobat = false
-            
+        
             while i < priority.count && !trobat {
                 if let link = manual.hasLanguage(priority[i].language) {
-                    print("el manual te l'idioma " + priority[i].language)
                     trobat = true
                     links.append(link)
                 }
-                else {
-                    print("el manual NOOO te l'idioma " + priority[i].language)
-                }
                 ++i
             }
+            /* As each Manual has at least one link, links will be never empty*/
         }
     }
     
@@ -126,19 +120,17 @@ class ViewControllerSend: UIViewController, MFMailComposeViewControllerDelegate,
             presentViewController(mail, animated: true, completion: nil)
         }
         else {
-            let actionSheetController: UIAlertController = UIAlertController(title: "Error", message: "Your device could not send e-mail. Please check e-mail configuration and try again.", preferredStyle: .Alert)
-            let cancelAction: UIAlertAction = UIAlertAction(title: "Ok", style: .Cancel) { action -> Void in  }
-            actionSheetController.addAction(cancelAction)
-
-            self.presentViewController(actionSheetController, animated: true, completion: nil)
+            AlertManager.basicAlert(NSLocalizedString("Error", comment: " "), message: NSLocalizedString("alertMessageMail", comment: " "), button: NSLocalizedString("Ok", comment: " "), who: self)
         }
     }
     
+    /*Once we return from the mailView, we reorder the languages according to the previous priority in case we have to resend */
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         controller.dismissViewControllerAnimated(true, completion: nil)
         self.languagesTable.reloadData()
     }
     
+ /* As delegate, to mantain the user priority language*/
     func priorityChanged(which: Int, newPriority: Int) {
         self.priority[which].priority = newPriority
     }
