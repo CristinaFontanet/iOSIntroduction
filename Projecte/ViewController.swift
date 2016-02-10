@@ -12,15 +12,13 @@ import MobileCoreServices
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SwitchClickDelegate{
 
-    
     @IBOutlet weak var manualsTable: UITableView!
     
-    var selectedIndexPath:NSIndexPath!
-    var manuals =  [Manual]()
-    var selectedManuals = [Int:NSIndexPath] ()
+    var manuals:[Manual]!
+    var selectedManuals:Set<NSIndexPath>!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    
+    func initialize() {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedObjectsContext = appDelegate.managedObjectContext
         //   entityDescription = NSEntityDescription.entityForName(entityManualName, inManagedObjectContext: managedObjectsContext) //descripció d'entitat, no instacia!!
@@ -31,18 +29,27 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         catch {
             print(error)
         }
-        // Do any additional setup after loading the view, typically from a nib.
+        selectedManuals = Set<NSIndexPath>()
+    }
+    
+    func initializeLanguagesForFirstTime() {
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        if let _ = userDefaults.objectForKey("languages") {/* It's not the first time */ }
+        else {
+            userDefaults.setObject(["EN","ES","CAT"], forKey: "languages")
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        initialize()
+        initializeLanguagesForFirstTime()
+               // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        selectedIndexPath = indexPath
-        print("Hey, he seleccionat")
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -60,7 +67,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }()
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
-        
         //let cell = tableView.dequeueReusableCellWithIdentifier("userAttribute", forIndexPath: indexPath)
         if let cell = tableView.dequeueReusableCellWithIdentifier("manualCell", forIndexPath: indexPath) as? ProductTableViewCell {
             cell.delegate = self
@@ -105,17 +111,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     
-    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 80
     }
     
     func onSwitchChange(active:Bool, indexPath: NSIndexPath) {
-        if(active) {print("He activat el switch de la linia " + String(indexPath.row) ) }
-        else {print("He DESACTIVAT el switch de la linia " + String(indexPath.row) ) }
+        if(active) {
+            selectedManuals.insert(indexPath)
+            print("He activat el switch de la linia " + String(indexPath.row) )
+        }
+        else {
+            selectedManuals.remove(indexPath)
+            print("He DESACTIVAT el switch de la linia " + String(indexPath.row) )
+        }
     }
     
     func newManualAdded(newManual:Manual, addView: ViewControllerAdd) {
+        initialize()
         manuals.append(newManual)
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.saveContext()
@@ -125,6 +137,26 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        guard let segueIdentifier = segue.identifier else {
+            return
+        }
+        
+        print(segueIdentifier)
+        
+        switch segueIdentifier {
+        case "send":
+            let destination = segue.destinationViewController as! ViewControllerSend
+            var manualsToSend = [Manual]()
+            for path in selectedManuals {
+                manualsToSend.append(manuals[path.row])
+            }
+            destination.manuals = manualsToSend
+        default: break
+        }
+        
+    }
     
     @IBAction func onSendClick() {
         performSegueWithIdentifier("send", sender: self)

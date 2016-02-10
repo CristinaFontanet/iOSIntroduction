@@ -10,8 +10,6 @@ import UIKit
 
 class ViewControllerPicker: UIViewController {
     
-    var languages = ["Mozzarella","Gorgonzola","Provolone","Brie","Maytag Blue","Sharp Cheddar","Monterrey Jack","Stilton","Gouda","Goat Cheese", "Asiago"]
-    
     var picker:UIPickerView!
     
     

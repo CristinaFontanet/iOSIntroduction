@@ -20,4 +20,16 @@ class Manual: NSManagedObject {
         switchState = false
     }
 */
+    
+    func hasLanguage(lang:String) -> Link? {
+        guard let hasLinks = links else {
+            return nil
+        }
+        
+        for link in hasLinks {
+            let aux = link as! Link
+            if aux.language == lang { return aux }
+        }
+        return nil
+    }
 }

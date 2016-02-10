@@ -18,11 +18,19 @@ class ViewControllerAddLink: UIViewController, UIPickerViewDelegate, UIPickerVie
     var delegate: linkAddDelegate!
     
     @IBOutlet weak var linkText: UITextField!
-    let languages = ["EN","ES","CAT"]
+    var languages = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         linkText.becomeFirstResponder()
+
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        if let lang = userDefaults.objectForKey("languages") {
+            if let hope = lang as? [String] {
+                languages = hope
+            }
+            else { linkText.text = "puc obrir pro es nil" }
+        }
         // Do any additional setup after loading the view.
     }
 

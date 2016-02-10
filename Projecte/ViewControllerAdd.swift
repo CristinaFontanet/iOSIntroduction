@@ -98,7 +98,8 @@ class ViewControllerAdd: UIViewController, UITableViewDataSource, UITableViewDel
             destination.delegate = self
             lastAddLinkView = destination
         case "newManual":
-            let destination = segue.destinationViewController as! ViewController
+            let dest = segue.destinationViewController as! UINavigationController
+            let destination = dest.topViewController as! ViewController
             destination.newManualAdded(manual, addView: self)
         default: break
         }
@@ -111,15 +112,22 @@ class ViewControllerAdd: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     func saveNewDownloadLinkSelected(link:String, language:String) {
-        
-        lastAddLinkView.dismissViewControllerAnimated(true) {
-            let newLink = Link(entity: self.entityLinkDescription!, insertIntoManagedObjectContext: self.managedObjectsContext )
-            newLink.manual = self.manual
-            newLink.language = language
-            newLink.link = link
-            self.links.append(newLink)
-            let indexPath = NSIndexPath(forRow: self.links.count-1, inSection: 0)
-            self.linksTable.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Bottom)
+        if let _ = manual.hasLanguage(language) {
+            let mess = "This manual already has a " + language + " link"
+            let ac = UIAlertController(title: "Save error", message: mess, preferredStyle: .Alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            presentViewController(ac, animated: true, completion: nil)
+        }
+        else {
+            lastAddLinkView.dismissViewControllerAnimated(true) {
+                let newLink = Link(entity: self.entityLinkDescription!, insertIntoManagedObjectContext: self.managedObjectsContext )
+                newLink.manual = self.manual
+                newLink.language = language
+                newLink.link = link
+                self.links.append(newLink)
+                let indexPath = NSIndexPath(forRow: self.links.count-1, inSection: 0)
+                self.linksTable.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Bottom)
+            }
         }
         
     }
@@ -238,7 +246,8 @@ class ViewControllerAdd: UIViewController, UITableViewDataSource, UITableViewDel
     
 /* SAVE */
     @IBAction func onSaveClicked() {
-        if let nameManual = manualName.text {
+        let nameManual = manualName.text!
+        if nameManual.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) != "" {
             if links.count > 0 {
                 manual.name = nameManual
                 if let newImage = image {
@@ -248,11 +257,15 @@ class ViewControllerAdd: UIViewController, UITableViewDataSource, UITableViewDel
                 performSegueWithIdentifier("newManual", sender: self)
             }
             else {
-                //alert falten links
+                let ac = UIAlertController(title: "Save error", message: "Add links please", preferredStyle: .Alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                presentViewController(ac, animated: true, completion: nil)
             }
         }
         else {
-            //alert falta nom
+            let ac = UIAlertController(title: "Save error", message: "Write a name please", preferredStyle: .Alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            presentViewController(ac, animated: true, completion: nil)
         }
         
     }
