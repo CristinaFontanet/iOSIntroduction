@@ -1,0 +1,23 @@
+/* 
+  Localizable.strings
+  Projecte
+
+  Created by 1181432 on 10/2/16.
+  Copyright © 2016 FIB. All rights reserved.
+*/
+/* 
+ NSLocalizedString("", comment: " ")
+ */
+
+"Ok" = "Ok";
+
+/*ViewController */
+
+"labelCellWhenNoLinks" = "There are no links";
+"alertTitleRecoverError" = "Recover error";
+"alertMessageRecoverError" = "Something happened when recovering data. Try again later.";
+
+/* */
+"alertTitleNewLanguageOk" = "Language saved";
+"alertTitleNewLanguageError" = "Save error";
+

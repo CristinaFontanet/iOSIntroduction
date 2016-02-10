@@ -135,23 +135,23 @@ class ViewControllerAdd: UIViewController, UITableViewDataSource, UITableViewDel
 /* Delete links */
     func deleteButtonSelected(which: NSIndexPath) {
         print("Delete from " + String(which.row) + " selected")
-        let actionSheetController: UIAlertController = UIAlertController(title: "Action Sheet", message: "Swiftly Now! Choose an option!", preferredStyle: .Alert)
+        let actionSheetController: UIAlertController = UIAlertController(title: "Delete link", message: "Are you sure you want to delete this link?", preferredStyle: .Alert)
         
-        //Create and add the Cancel action
-        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
+        let cancelAction: UIAlertAction = UIAlertAction(title: "No", style: .Cancel) { action -> Void in
             //Just dismiss the action sheet
         }
         actionSheetController.addAction(cancelAction)
-        //Create and add first option action
-        let takePictureAction: UIAlertAction = UIAlertAction(title: "Take Picture", style: .Default) { action -> Void in
-            //Code for launching the camera goes here
+        
+        
+        /////HEREEEEEEEEEEEEEEEEEE
+        let yesAction: UIAlertAction = UIAlertAction(title: "Yes", style: .Default) { action -> Void in
+            let aux = self.manual.links as! NSMutableSet
+            aux.removeObject(self.links[which.row])
+            self.manual.links = aux as NSSet
+            self.links.removeAtIndex(which.row)
+            self.linksTable.reloadData()
         }
-        actionSheetController.addAction(takePictureAction)
-        //Create and add a second option action
-        let choosePictureAction: UIAlertAction = UIAlertAction(title: "Choose From Camera Roll", style: .Default) { action -> Void in
-            //Code for picking from camera roll goes here
-        }
-        actionSheetController.addAction(choosePictureAction)
+        actionSheetController.addAction(yesAction)
         
         //Present the AlertController
         self.presentViewController(actionSheetController, animated: true, completion: nil)

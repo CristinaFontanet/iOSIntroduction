@@ -10,9 +10,10 @@ import UIKit
 
 class ViewControllerSettings: UIViewController {
 
+    var newLang:String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
 
@@ -25,6 +26,52 @@ class ViewControllerSettings: UIViewController {
         performSegueWithIdentifier("addManual", sender: self)
     }
 
+    func alreadyExistsLanguage(languages: [String], newLanguage:String)->Bool {
+        for lang in languages {
+            if lang == newLanguage {return true}
+        }
+        return false
+    }
+    
+    @IBAction func onAddLanguageClicked() {
+        let alert = UIAlertController(title: "New Language", message: "Add a new language", preferredStyle: .Alert)
+        
+        let saveAction = UIAlertAction(title: "Save", style: .Default, handler: { (action:UIAlertAction) -> Void in
+            let textField = alert.textFields!.first
+            let newLanguage = textField!.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+            if newLanguage != "" {
+                var languages = [String]()
+                let userDefaults = NSUserDefaults.standardUserDefaults()
+                if let lang = userDefaults.objectForKey("languages") {
+                    if let hope = lang as? [String] {
+                        languages = hope
+                    }
+                }
+                if !self.alreadyExistsLanguage(languages, newLanguage: newLanguage) {
+                    languages.append(newLanguage)
+                    userDefaults.setObject(languages, forKey: "languages")
+                    
+                    AlertManager.basicAlert(NSLocalizedString("alertTitleNewLanguageOk", comment: " "), message: "The new language has been saved.", button: "Ok", who: self)
+                }
+                else {
+                    AlertManager.basicAlert(NSLocalizedString("alertTitleNewLanguageError", comment: " "), message: "This language already exists", button: "Ok", who: self)
+                }
+            }
+        })
+        
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action: UIAlertAction) -> Void in }
+        
+        alert.addTextFieldWithConfigurationHandler {        //x afegir el textField
+            (textField: UITextField) -> Void in
+        }
+        
+        alert.addAction(saveAction)
+        alert.addAction(cancelAction)
+        
+        presentViewController(alert, animated: true, completion:  nil)
+    }
+    
     /*
     // MARK: - Navigation
 

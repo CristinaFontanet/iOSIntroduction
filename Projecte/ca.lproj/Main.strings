@@ -1,0 +1,69 @@
+
+/* Class = "UILabel"; text = "Product list"; ObjectID = "7zA-Go-U2Z"; */
+"7zA-Go-U2Z.text" = "Llista de productes";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "BM1-6o-Ekn"; */
+"BM1-6o-Ekn.text" = "Nom";
+
+/* Class = "UIButton"; normalTitle = "Send"; ObjectID = "F39-ex-Bok"; */
+"F39-ex-Bok.normalTitle" = "Envia";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "FLF-6y-iPP"; */
+"FLF-6y-iPP.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "FM9-2p-x3v"; */
+"FM9-2p-x3v.normalTitle" = "Guarda";
+
+/* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "Hjl-R4-lWk"; */
+"Hjl-R4-lWk.normalTitle" = "Elimina";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "MaX-QG-AwY"; */
+"MaX-QG-AwY.text" = "Label";
+
+/* Class = "UILabel"; text = "Links:"; ObjectID = "N7J-4C-dce"; */
+"N7J-4C-dce.text" = "Links:";
+
+/* Class = "UIButton"; normalTitle = "Send"; ObjectID = "Nhg-Ox-ye2"; */
+"Nhg-Ox-ye2.normalTitle" = "Envia";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "QbZ-ng-EEM"; */
+"QbZ-ng-EEM.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "QnI-Ue-XVj"; */
+"QnI-Ue-XVj.normalTitle" = "Cancel";
+
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "RWN-AX-nB5"; */
+"RWN-AX-nB5.normalTitle" = "Guarda";
+
+/* Class = "UILabel"; text = "Copy from browser and Paste here the download link"; ObjectID = "Tr4-Sb-xBP"; */
+"Tr4-Sb-xBP.text" = "Copia el link de descàrrega del navegador i copia'l aquí";
+
+/* Class = "UIButton"; normalTitle = "Add Language"; ObjectID = "VI6-D8-seI"; */
+"VI6-D8-seI.normalTitle" = "Afegeix un idioma";
+
+/* Class = "UILabel"; text = "Name:"; ObjectID = "Y2F-60-F0M"; */
+"Y2F-60-F0M.text" = "Nom:";
+
+/* Class = "UILabel"; text = "Image: "; ObjectID = "Yvy-p7-3W0"; */
+"Yvy-p7-3W0.text" = "Imatge: ";
+
+/* Class = "UILabel"; text = "Mail:"; ObjectID = "Zj4-zh-1ut"; */
+"Zj4-zh-1ut.text" = "Mail:";
+
+/* Class = "UIButton"; normalTitle = "Add Manual"; ObjectID = "dlW-jL-O2T"; */
+"dlW-jL-O2T.normalTitle" = "Afegeix un Manual";
+
+/* Class = "UILabel"; text = "Name:"; ObjectID = "hlM-l4-WU7"; */
+"hlM-l4-WU7.text" = "Nom:";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "ouq-HD-WaR"; */
+"ouq-HD-WaR.normalTitle" = "Cancel";
+
+/* Class = "UILabel"; text = "Add download link"; ObjectID = "sZL-gO-2Fk"; */
+"sZL-gO-2Fk.text" = "Afegeix un link de descàrrega";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "tFY-hs-Ti9"; */
+"tFY-hs-Ti9.text" = "Label";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "tQ2-ZU-CtH"; */
+"tQ2-ZU-CtH.text" = "0";

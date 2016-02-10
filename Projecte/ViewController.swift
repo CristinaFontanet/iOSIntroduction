@@ -27,7 +27,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             manuals = try managedObjectsContext.executeFetchRequest(fetchProductRequest) as! [Manual]
         }
         catch {
-            print(error)
+            AlertManager.basicAlert(NSLocalizedString("alertTitleRecoverError", comment: " "), message: NSLocalizedString("alertMessageRecoverError", comment: " "), button: NSLocalizedString("Ok", comment: " "), who: self)
         }
         selectedManuals = Set<NSIndexPath>()
     }
@@ -81,7 +81,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 }
             }
             else {
-                languages = "There are no links"
+                languages =  NSLocalizedString("labelCellWhenNoLinks", comment: " ")
             }
             cell.languagesLabel.text = languages
             //image
@@ -95,15 +95,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 if fileManager.fileExistsAtPath(path), let recoveredData = fileManager.contentsAtPath(path) {
                         cell.imageManual.image = UIImage(data: recoveredData)
                 }
-                else {
-                    cell.imageManual.image = UIImage(named: "Book")
-                    print("error no existeix fitxer al path :" + path)
-                }
+                else { cell.imageManual.image = UIImage(named: "Book") }
             }
-            else {
-                cell.imageManual.image = UIImage(named: "Book")
-                print("error")
-            }
+            else { cell.imageManual.image = UIImage(named: "Book") }
+            
             return cell
         }
     
@@ -116,18 +111,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func onSwitchChange(active:Bool, indexPath: NSIndexPath) {
-        if(active) {
-            selectedManuals.insert(indexPath)
-            print("He activat el switch de la linia " + String(indexPath.row) )
-        }
-        else {
-            selectedManuals.remove(indexPath)
-            print("He DESACTIVAT el switch de la linia " + String(indexPath.row) )
-        }
+        if(active) { selectedManuals.insert(indexPath) }
+        else { selectedManuals.remove(indexPath) }
     }
     
     func newManualAdded(newManual:Manual, addView: ViewControllerAdd) {
-        initialize()
+        initialize()    //Navigation
         manuals.append(newManual)
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.saveContext()
@@ -143,8 +132,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             return
         }
         
-        print(segueIdentifier)
-        
         switch segueIdentifier {
         case "send":
             let destination = segue.destinationViewController as! ViewControllerSend
@@ -155,7 +142,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             destination.manuals = manualsToSend
         default: break
         }
-        
     }
     
     @IBAction func onSendClick() {
