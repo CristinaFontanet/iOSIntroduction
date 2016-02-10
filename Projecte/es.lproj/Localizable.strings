@@ -1,0 +1,58 @@
+/* 
+  Localizable.strings
+  Projecte
+
+  Created by 1181432 on 10/2/16.
+  Copyright © 2016 FIB. All rights reserved.
+*/
+/*
+ NSLocalizedString("", comment: " ")
+ */
+
+"Ok" = "Ok";
+"alertTitleSaveError" = "Error al guardar";
+"No" = "No";
+"Yes" = "Si";
+"alertActionCancel" = "Cancelar";
+"Error" = "Error";
+
+/*ViewController */
+
+"labelCellWhenNoLinks" = "No hay links";
+"alertTitleRecoverError" = "Error de recuperación";
+"alertMessageRecoverError" = "Ha ocurrido un error al recuperar los datos de la aplicación. Vuelve a intentarlo mas tarde.";
+"alertTitleSendError" = "Error al enviar";
+"alertMessageNoManualsSelected" = "Escoje algun manual antes de enviar."
+
+/*ViewControllerSettings*/
+"alertTitleNewLanguage" = "Nuevo idioma";
+"alertMessageNewLanguage" = "Añade un nuevo idioma";
+"alertActionSave" = "Guarda";
+
+"alertTitleNewLanguageOk" = "Idioma guardado";
+"alertMessageNewLanguageOk" = "El nuevo idioma ha sido guardado correctamente.";
+
+
+"alertMessageNewLanguageError" = "Este idioma ya existe";
+
+/*ViewControllerAdd*/
+"repeatedLanguagePrevious" = "Este manual ya tiene un link en  ";
+"repeatedLanguageAfter" = ".";
+
+"alertTitleDeleteLink" = "Elimina el link";
+"alertMessageDeleteLink" = "¿Estas seguro de que queieres eliminar éste?";
+
+"alertTitleImage" = "Escoje una imagen";
+"alertActionCamera" = "De la camera";
+"alertActionFile" = "De la galeria";
+
+"alertMessageAddLinks" = "Añade links porfavor";
+"alertMessageWriteName" = "Escribe un nombre profavor";
+
+/*ViewControllerSend*/
+"mailSubject" = "Algunos Manuales";
+"alertMessageMail" = "Tu dispositivo no puede enviar e-mails. Porfavor, revisa la configuración y vuelve a intentar.";
+/*
+ NSLocalizedString("", comment: " ")
+ */
+

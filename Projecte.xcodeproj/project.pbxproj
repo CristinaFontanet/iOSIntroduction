@@ -55,6 +55,8 @@
 		2BD2DD941C6B7F4B006DA2D6 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
 		2BD2DD951C6B7F4D006DA2D6 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		2BD2DD991C6B80DC006DA2D6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6B9D75CA1C6BEA0D00BC9613 /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6B9D75CB1C6BEA1100BC9613 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6BD5DFF81C6B1CF7002E01D8 /* ViewControllerSend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerSend.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -157,6 +159,7 @@
 				en,
 				Base,
 				ca,
+				es,
 			);
 			mainGroup = 2B7CD3681C62768400544047;
 			productRefGroup = 2B7CD3721C62768400544047 /* Products */;
@@ -233,6 +236,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				2BD2DD991C6B80DC006DA2D6 /* en */,
+				6B9D75CA1C6BEA0D00BC9613 /* ca */,
+				6B9D75CB1C6BEA1100BC9613 /* es */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
