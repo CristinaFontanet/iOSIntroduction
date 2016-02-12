@@ -141,9 +141,10 @@ class ViewControllerAdd: UIViewController, UITableViewDataSource, UITableViewDel
         
         /////HEREEEEEEEEEEEEEEEEEE
         let yesAction: UIAlertAction = UIAlertAction(title: NSLocalizedString("Yes", comment: " "), style: .Default) { action -> Void in
-            let aux = self.manual.links as! NSMutableSet
+            /*let aux = self.manual.links as! NSMutableSet
             aux.removeObject(self.links[which.row])
-            self.manual.links = aux as NSSet
+            self.manual.links = aux as NSSet */
+            self.managedObjectsContext.deleteObject(self.links[which.row])
             self.links.removeAtIndex(which.row)
             self.linksTable.reloadData()
         }
